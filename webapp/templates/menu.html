@@ -9,13 +9,31 @@
       <li class="nav-item active">
         <a class="nav-link" href="/">Главная страница <span class="sr-only"></span></a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href=" {{ url_for('user.login') }}">Логин</a>
-      </li>
     </ul>
       <form class="d-flex ms-auto"> <!-- Добавлен ms-auto -->
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success" type="submit">ПОИСК</button>
       </form>
+      <ul class="navbar-nav">
+        
+            {% if current_user.is_authenticated %}
+            <li class="nav-item">
+            <span class="nav-link">Привет, {{ current_user.username }}</span>
+            </li>
+            {% if current_user.is_admin %}
+            <a class="nav-link" href=" {{ url_for('admin.admin_index') }}">Админка</a>
+            {% endif %}
+            <li class="nav-item">
+            <a class="nav-link" href=" {{ url_for('user.logout') }}">Выйти</a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+            <a class="nav-link" href=" {{ url_for('user.register') }}">Регистрация</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href=" {{ url_for('user.login') }}">Войти</a>
+            </li>
+            {% endif %}
+      </ul>
   </div>
 </nav>

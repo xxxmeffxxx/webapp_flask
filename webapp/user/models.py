@@ -8,7 +8,8 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(50), index=True, unique=True)
     password = db.Column(db.String(100))
     role = db.Column(db.String(10), index=True)
-    
+    email = db.Column(db.String(50), nullable=True) 
+
     @property
     def is_admin(self):
         return self.role == 'admin'
