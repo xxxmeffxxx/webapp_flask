@@ -2,7 +2,7 @@ from getpass import getpass
 import sys
 
 from webapp import create_app
-from webapp.model import db, User
+from webapp.db import db, User
 
 app = create_app()
 with app.app_context():
@@ -17,7 +17,7 @@ with app.app_context():
         print('Пароли не совпадают')
         sys.exit(0)
 
-    new_user = User(username=username, role = 'admin')
+    new_user = User(username=username, role='admin')
     new_user.set_password(password)
 
     db.session.add(new_user)
